@@ -1,0 +1,27 @@
+html {
+    /* background-image: url('images/bg.webp'); */
+    background-color: black;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body, .label, .title, .subtitle {
+    color: white;
+    background-color: black;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+.modal-card > * {
+    color: black;
+    background-color: white;
+}
+
+a {
+    font-size: 20px;
+    background-color: black;
+    color: hsl(348, 100%, 61%);
+}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block btn %}
+Sign Out
+{% endblock %}
+
+{% block title %}Suspended{% endblock %}
+
+{% block content %}
+<div class="columns is-centered">
+    <div id="suspended" class="column">
+        <h1 class="subtitle is-3 has-text-centered  mt-6 pt-6">Your account is suspended.</h1>
+        <div>
+            <p class="has-text-centered ">
+                Try changing attribute values to re-activate your account.
+            </p>
+        </div><br /><br />
+        <button class="button is-medium is-warning is-outlined" style="margin-left: 47%;"
+            onclick="toggle()">Change</button>
+    </div>
+    <div id="change" class="container column is-hidden">
+        <form method="POST" action="/changed">
+            <div class="field">
+                <label class="label subtitle">Username</label>
+                <div class="control">
+                    <input class="input" type="text" name="username" placeholder="username" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label subtitle">Fullname</label>
+                <div class="control">
+                    <input class="input" type="text" name="fullname" placeholder="fullname" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label subtitle">Description</label>
+                <div class="control">
+                    <input class="input" type="text" name="description" placeholder="Description" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                        <input type="checkbox" required>
+                        <span>I agree to the </span><span class="has-text-warning">terms and
+                            conditions</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-success">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-danger is-outlined" onclick="toggle()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    toggle = () => {
+        document.getElementById("suspended").classList.toggle('is-hidden')
+        document.getElementById("change").classList.toggle('is-hidden')
+    }
+</script>
+{% endblock %}

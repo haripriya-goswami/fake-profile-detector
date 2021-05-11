@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block btn %} Sign Out {% endblock %} {% block title %}Home Page{% endblock %} {% block
+content %}
+<div class="container" id="header" style="background-color: black; opacity: 0.85; margin-top: 3rem;">
+    {% if fake %}
+    <article class="message is-warning">
+        <div class="message-body">
+            Your profile is suspected to be illegal. Please change your attribute values or serious measures could
+            be taken for your profile.
+        </div>
+    </article>
+    {% endif %}
+    <div class="columns">
+        <div class="column"></div>
+        <div class="column is-offset-4 is-4">
+            <div class="image is-128x128">
+                <img src="{{ pic }}" alt="User" class="is-rounded">
+                <p class="subtitle">{{name}}</p>
+            </div>
+        </div>
+        <div class="column"></div>
+    </div>
+
+    {% if not matches %}
+    <div></div>
+    <h3>No similar profiles</h3>
+    {% else %}
+    <h3 class="title pt-6">Suspected Profiles</h3>
+    {% for match in matches %}
+    <div class="block">
+        <div class="level">
+            <div class="level-left pl-5">
+                <div class="level-item image is-128x128">
+                    <img src="{{ match[1] }}" alt="user" class="is-rounded" width="100" height="100">
+                </div>
+                <div class="level-item column is-6">
+                    <a href="/profile/{{match[0]}}">{{match[0]}}</a>
+                    <div class="columns">
+                        <div class="column is-narrow">
+                            <p>{{match[2]}} mutuals</p>
+                        </div>
+                        <div class="column is-narrow has-text-primary">{{match[4]}}% similar</div>
+                    </div>
+                </div>
+                {% if match[12] == 1 %}
+                <div class="is-1 tag is-danger">Suspended</div>
+                {% else %}
+                <div class="is-1 ml-3"></div>
+                <div class="level-item column">
+                </div>
+            </div>
+            <div class="level-right pr-5">
+                <div class="column">
+                    <button id={{match[0]}} class="rep button is-rounded is-danger">Report</button>
+                    <p class="ml-4">{{match[3]}} reports</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %} {% endif %}
+</div>
+{% endblock %}

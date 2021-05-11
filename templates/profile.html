@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block btn %} Sign Out {% endblock %}
+{% block title %}{{det[0]}}{% endblock %}
+{% block content %}
+<div class="container mt-6" id="header">
+    <div class="block">
+        <div class="columns">
+            <div class="column is-1">
+                <div class="image" style="width:150px; height: 150px;">
+                    <img src="{{ img }}" alt="User" class="is-rounded">
+                </div>
+            </div>
+            <div class="column is-9 pl-6 ml-6 pt-6">
+                <div class="subtitle is-4">{{det[0]}} {% if det[1] != '' %} ( {{det[1]}} ) {% endif %}
+                </div>
+                {% if det[2] != '' %}
+                <div class="subtitle">{{det[2]}}</div>
+                {% endif %}
+            </div>
+            {% if det[0] == name or det[23] == 1 %}
+            <div></div>
+            {% else %}
+            <div class="column pr-6 mr-6 pt-6">
+                <button id={{det[0]}} class="rep button is-medium is-danger is-rounded">Report</button>
+                <p class="pl-5 ">{{det[21]}} Reports</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="columns">
+            {% if det[23] == 1 %}
+            <div class="column is-1 tag is-danger mt-2" style="margin-left: 35px;">Suspended</div>
+            {% else %}
+            <div class="column is-1 ml-6"></div>
+            {% endif %}
+            <div class="pl-6 " style="font-size: 20px;"><b>{{det[7]}}</b> Posts</div>
+            <div class="pl-6 " style="font-size: 20px;"><b>{{det[10]}}</b> Friends</div>
+        </div>
+
+    </div>
+    <div class="columns">
+        {% if matches or prime %}
+        {% if matches %}
+        <div class="column">
+            <p class="title is-4 py-6">Suspected Profiles similar to '{{det[0]}}'</p>
+            {% for match in matches %}
+            <div class="block">
+                <div class="level">
+                    <div class="level-left pl-5">
+                        <div class="level-item image is-128x128">
+                            <img src="{{ match[1] }}" alt="user" class="is-rounded" width="100" height="100">
+                        </div>
+                        <div class="level-item column is-6">
+                            <a href="/profile/{{match[0]}}">{{match[0]}}</a>
+                            <div class="columns">
+                                <div class="column is-narrow">
+                                    <p>{{match[2]}} mutuals</p>
+                                </div>
+                                <div class="column is-narrow has-text-primary">{{match[4]}}% similar</div>
+                            </div>
+                        </div>
+                        {% if match[12] == 1 %}
+                        <div class="is-1 tag is-danger">Suspended</div>
+                        {% else %}
+                        <div class="is-1 ml-2"></div>
+                        {% endif %}
+                        <div class="level-item column">
+                        </div>
+                    </div>
+                    {% if match[0] == name or match[12] == 1 %}
+                    <div></div>
+                    {% else %}
+                    <div class="level-right pr-5 mr-6">
+                        <div class="column">
+                            <button id={{match[0]}} class="rep button is-rounded is-danger">Report</button>
+                            <p class="ml-4">{{match[3]}} reports</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if prime %}
+        <div class="column pt-6 mt-3 pl-6">
+            <p class="subtitle">(Similar to your profile)</p>
+            <p class="subtitle">Analysis of similarity:</p>
+            <div class="tile is-ancestor has-text-centered">
+                <div class="tile is-parent is-vertical">
+                    <p class="tile is-child box">Overall: <b>{{result[4]}}%</b></p>
+                    <p class="tile is-child box">Username: <b>{{result[5]}}%</b></p>
+                    {% if det[3] %}
+                    <p class="tile is-child box">Description: <b>{{result[7]}}%</b></p>
+                    {% else %}
+                    <p class="tile is-child box has-text-danger">No Description</p>
+                    {% endif %}
+                </div>
+                <div class="tile is-parent is-vertical">
+                    <p class="tile is-child box">Avatar: <b>{{result[10]}}%</b></p>
+                    {% if det[2] %}
+                    <p class="tile is-child box">Fullname: <b>{{result[6]}}%</b></p>
+                    {% else %}
+                    <p class="tile is-child box has-text-danger">No Fullname</p>
+                    {% endif %}
+                    <p class="tile is-child box">DOB: <b>{% if result[9] %}Similar{% else %}Not Similar{%
+                            endif %}</b></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% else %}
+        <div></div>
+        <h3 class="subtitle is-4 has-text-centered mt-6">No similar profiles</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

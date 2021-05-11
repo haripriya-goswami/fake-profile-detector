@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block btn %}
+Sign Out
+{% endblock %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container" id="header">
+  <p class="title p-6">Search results for '{{name}}'</p>
+  {% if not users %}
+  <div></div>
+  <p class="subtitle">Nothing to show</p>
+  {% else %}
+  {% for user in users %}
+  <div class="block">
+    <div class="level">
+      <div class="level-left pl-5">
+        <div class="level-item image is-128x128">
+          {% if user[0] in img %}
+          <img src="static/images/{{user[0]}}.jpg" alt="user" class="is-rounded" width="100" height="100">
+          {% else %}
+          <img src="static/images/no.jpg" alt="user" class="is-rounded" width="100" height="100">
+          {% endif %}
+        </div>
+        <div class="level-item column is-5">
+          <a href="/profile/{{user[0]}}">{{user[0]}}</a>
+        </div>
+        <div class="level-item column">
+        </div>
+      </div>
+      <div class="level-right pr-5">
+        <button id={{user[0]}} class="rep button is-rounded is-danger">Report</button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

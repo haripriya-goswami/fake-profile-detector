@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container" style="display: flex;align-items: center;justify-content: center;">
+        {% if err %}
+        <script>
+            alert("Please login with valid credentials")
+        </script>
+        {% endif %}
+        <div>
+            <p class="is-family-code has-text-centered p-6 m-6" style="font-size: 30px;">Fake Profile Detector</p>
+
+            <p class="subtitle has-text-centered">Login with your SMP credentials</p>
+            <form method="POST" action="#">
+                <div class="field block">
+                    <label class="label">Username</label>
+                    <input class="input" name="username" id="username" placeholder="type username here"
+                        value="{{username}}" required>
+                </div>
+                <div class="field block">
+                    <label class="label">Password</label>
+                    <input type="password" class="input" name="password" id="password" placeholder="type password here"
+                        value="{{password}}" required>
+                </div>
+                <div class="columns is-centered mt-6">
+                    <button type="submit" class="submit button is-medium is-danger">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
